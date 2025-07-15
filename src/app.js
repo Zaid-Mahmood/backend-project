@@ -28,7 +28,7 @@ app.use(express.json({
 
 // so we are engaging server that this type of long string can also exist after base url so we use this below middleware
  
-app.use(express.urlencoded({extended , limit : "16kb"}))
+app.use(express.urlencoded({extended : true , limit : "16kb"}))
 
 // Middleware to add images , videos on server (keep in mind not these are not saved on hosted url / deployment url )
 app.use(express.static("public"))
@@ -36,3 +36,9 @@ app.use(express.static("public"))
 // Middleware to add cookies , update cookies , del cookies or read cookies from server to client side (frontend) or sometimes access cookies from frontend to server also
 
 app.use(cookieParser());
+
+import userRouter from "./routes/user.route.js";
+
+app.use("/api/v1/users" , userRouter)
+
+export {app}
