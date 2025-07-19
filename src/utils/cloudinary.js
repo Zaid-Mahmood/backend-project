@@ -15,7 +15,7 @@ import fs from "fs";
             const uploadFile = await cloudinary.uploader.upload(mediaFile,
                 { resource_type: "auto" }
             )
-            console.log("File has been uploaded on cloudinary ", uploadFile.url)
+         // remove the locally temp file as file uploaded on cloudinary
             fs.unlinkSync(mediaFile)
             return uploadFile
         }
