@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { registerUser, loginUser } from "../controllers/user.controller.js";
+import { registerUser, loginUser, logoutUser, newRefreshToken, changePassword, getCurrentUser, changeAccountDetails, changeAvatarImg, changeCoverImg } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
+import { verifyJwt } from "../middlewares/logout.middleware.js";
 const router = Router();
 
 // For post requests
@@ -20,5 +21,21 @@ router.route("/register").post(
     registerUser)
 
 router.route("/login").post(loginUser)
+
+router.route("/logout").post(verifyJwt, logoutUser)
+
+router.route("/refresh-token").post(newRefreshToken)
+
+router.route("/change-password").post(verifyJwt, changePassword)
+
+router.route("/current-user").get(verifyJwt, getCurrentUser)
+
+router.route("/change-account-details").post(verifyJwt, changeAccountDetails)
+
+router.route("/change-avatar-Image").post(verifyJwt, changeAvatarImg)
+
+router.route("/change-cover-Image").post(verifyJwt, changeCoverImg)
+
+
 
 export default router;
